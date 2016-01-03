@@ -57,7 +57,7 @@ $(FISH_CONFIG):
 	@echo "set fisher_config $(FISHER_CONFIG)" | sed "s|$$HOME|~|" >> $@.fisher
 	@echo "source \$$fisher_home/config.fish" >> $@.fisher
 	@awk '!config[$$0]++' $@.fisher $@ > $@.tmp
-	@mv $@.tmp $@ && rm $@.fisher
+	@mv $@.tmp $$(realpath $@) && rm $@.fisher
 
 $(FISHER_CACHE):
 	@[ -d $@ ] || echo "Creating $@" | $(TILDEIFY)
